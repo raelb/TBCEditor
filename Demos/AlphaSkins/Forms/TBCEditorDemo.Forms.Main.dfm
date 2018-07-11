@@ -6,7 +6,7 @@ inherited MainForm: TMainForm
   Position = poScreenCenter
   ShowHint = True
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 115
   TextHeight = 13
   object Splitter: TBCSplitter [0]
     Left = 754
@@ -36,6 +36,8 @@ inherited MainForm: TMainForm
     ParentShowHint = False
     ShowHint = True
     UseSystemFont = False
+    ExplicitTop = 625
+    ExplicitWidth = 1100
   end
   object PanelProperty: TBCPanel [2]
     Left = 760
@@ -475,12 +477,13 @@ inherited MainForm: TMainForm
           Left = 342
           Top = 0
           Width = 3
-          Height = 13
+          Height = 21
           Margins.Left = 0
           Margins.Top = 0
           Margins.Bottom = 0
           Align = alRight
           Layout = tlCenter
+          ExplicitHeight = 13
         end
       end
     end
@@ -508,8 +511,8 @@ inherited MainForm: TMainForm
         FontData.Font.Height = -11
         FontData.Font.Name = 'Tahoma'
         FontData.Font.Style = []
-        Height = 22
-        Width = 48
+        Height = 26
+        Width = 56
         Index = 0
         Name = 'TitleBarItemFile'
         ShowHint = True
@@ -523,8 +526,8 @@ inherited MainForm: TMainForm
         FontData.Font.Height = -11
         FontData.Font.Name = 'Tahoma'
         FontData.Font.Style = []
-        Height = 21
-        Width = 161
+        Height = 25
+        Width = 202
         Index = 1
         Name = 'TitleBarItemCaption'
         ShowHint = False
@@ -539,8 +542,8 @@ inherited MainForm: TMainForm
         FontData.Font.Height = -11
         FontData.Font.Name = 'Tahoma'
         FontData.Font.Style = []
-        Height = 22
-        Width = 56
+        Height = 26
+        Width = 66
         Index = 2
         Name = 'TitleBarItemEncoding'
         ShowHint = False
@@ -569,8 +572,8 @@ inherited MainForm: TMainForm
         FontData.Font.Height = -11
         FontData.Font.Name = 'Tahoma'
         FontData.Font.Style = []
-        Height = 22
-        Width = 101
+        Height = 26
+        Width = 123
         Index = 4
         Name = 'TitleBarItemHighlighter'
         ShowHint = False
@@ -599,8 +602,8 @@ inherited MainForm: TMainForm
         FontData.Font.Height = -11
         FontData.Font.Name = 'Tahoma'
         FontData.Font.Style = []
-        Height = 22
-        Width = 68
+        Height = 26
+        Width = 81
         Index = 6
         Name = 'TitleBarItemColors'
         ShowHint = False

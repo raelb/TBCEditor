@@ -42,7 +42,8 @@ implementation
 
 uses
   System.TypInfo, Vcl.Graphics, Vcl.Forms, BCEditor.Consts, BCEditor.Types, Vcl.Dialogs,
-  BCEditor.Highlighter.Token, Vcl.GraphUtil, BCEditor.Language;
+  BCEditor.Highlighter.Token, Vcl.GraphUtil, BCEditor.Language, TraceTool,
+  StackTrace;
 
 function StringToColorDef(const AString: string; const DefaultColor: TColor): Integer;
 begin
@@ -816,6 +817,7 @@ procedure TBCEditorHighlighterImportJSON.ImportFromStream(AStream: TStream);
 var
   JSONObject: TJsonObject;
 begin
+  //MainTrace.SendStack('ImportJSON.ImportFromStream');
   try
     JSONObject := TJsonObject.ParseFromStream(AStream) as TJsonObject;
     if Assigned(JSONObject) then
@@ -828,7 +830,11 @@ begin
     on E: EJsonParserException do
       raise EJsonImportException.Create(Format(SBCEditorErrorInHighlighterParse, [E.LineNum, E.Column, E.Message]));
     on E: Exception do
+    begin
+      MainTrace.Send(E.ClassName, E.Message).SetColor(clWhite);
+      MainTrace.SendStack('ImportJSON.ImportFromStream');
       raise EJsonImportException.Create(Format(SBCEditorErrorInHighlighterImport, [E.Message]));
+    end;
   end;
 end;
 

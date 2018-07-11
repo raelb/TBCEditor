@@ -87,7 +87,7 @@ type
 implementation
 
 uses
-  System.Types, BCEditor.Language;
+  System.Types, BCEditor.Language, TraceTool, StackTrace;
 
 const
   MARGIN_WIDTH_LEFT_AND_RIGHT = 12;
@@ -465,6 +465,8 @@ begin
   end
   else
     ScaleMode := pscUserScaled;
+
+  //MainTrace.SendStack('SetScalePercent');
   if Assigned(FOnScaleChange) then
     FOnScaleChange(Self);
 end;

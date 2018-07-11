@@ -744,11 +744,12 @@ begin
   BeginUpdate;
   try
     LSize := AStream.Size - AStream.Position;
-    if Assigned(AEncoding) then
+    if True {Assigned(AEncoding)} then
     begin
       SetLength(LBuffer, LSize);
       AStream.Read(LBuffer[0], LSize);
       LSize := TEncoding.GetBufferEncoding(LBuffer, AEncoding);
+      // SetEncoding(Encoding); // Added from Systen.Classes
       LStrBuffer := AEncoding.GetString(LBuffer, LSize, Length(LBuffer) - LSize);
       SetLength(LBuffer, 0);
     end
@@ -757,6 +758,7 @@ begin
       SetLength(LStrBuffer, LSize shr 1);
       AStream.ReadBuffer(LStrBuffer[1], LSize);
     end;
+
     SetTextStr(LStrBuffer);
     SetLength(LStrBuffer, 0);
   finally

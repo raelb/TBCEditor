@@ -2,7 +2,9 @@ program TBCEditorDemo;
 
 uses
   Vcl.Forms,
-  TBCEditorDemo.Forms.Main in 'Forms\TBCEditorDemo.Forms.Main.pas' {MainForm};
+  TBCEditorDemo.Forms.Main in 'Forms\TBCEditorDemo.Forms.Main.pas' {MainForm},
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 

@@ -399,11 +399,14 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  PropArray: TBCArrayOfString;
 begin
   inherited;
-
-  ObjectInspector.AddUnlistedProperties(['Ctl3D', 'CustomHint', 'Hint', 'HelpContext', 'HelpKeyword', 'HelpType',
-    'ImeMode', 'ImeName', 'ParentColor', 'ParentCtl3D', 'ParentCustomHint', 'ParentFont', 'ParentShowHint', 'ShowHint']);
+  {PropArray := ['Ctl3D', 'CustomHint', 'Hint', 'HelpContext', 'HelpKeyword', 'HelpType',
+    'ImeMode', 'ImeName', 'ParentColor', 'ParentCtl3D', 'ParentCustomHint',
+    'ParentFont', 'ParentShowHint', 'ShowHint']};
+  ObjectInspector.AddUnlistedProperties(PropArray);
   ObjectInspector.InspectedObject := Editor;
   ObjectInspector.SkinManager := SkinManager;
 

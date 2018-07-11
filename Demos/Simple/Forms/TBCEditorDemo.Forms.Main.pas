@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, BCEditor.Editor.Base, BCEditor.Editor, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, BCEditor.Editor.Base, BCEditor.Editor, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.Menus;
 
 type
   TMainForm = class(TForm)
@@ -14,9 +15,15 @@ type
     PanelLeft: TPanel;
     SplitterVertical: TSplitter;
     SplitterHorizontal: TSplitter;
+    PopupMenu1: TPopupMenu;
+    T1: TMenuItem;
+    E1: TMenuItem;
+    SaveDialog1: TSaveDialog;
+    procedure E1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListBoxHighlightersClick(Sender: TObject);
     procedure ListBoxColorsClick(Sender: TObject);
+    procedure T1Click(Sender: TObject);
   private
     { Private declarations }
     procedure SetSelectedColor;
@@ -42,6 +49,12 @@ begin
   finally
     FindClose(LSearchRec);
   end;
+end;
+
+procedure TMainForm.E1Click(Sender: TObject);
+begin
+  if SaveDialog1.Execute then
+    Editor.ExportToHTML(SaveDialog1.FileName);
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -89,6 +102,11 @@ end;
 procedure TMainForm.ListBoxHighlightersClick(Sender: TObject);
 begin
   SetSelectedHighlighter;
+end;
+
+procedure TMainForm.T1Click(Sender: TObject);
+begin
+//
 end;
 
 end.

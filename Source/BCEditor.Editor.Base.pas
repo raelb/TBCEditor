@@ -29,7 +29,7 @@ type
     FAltEnabled: Boolean;
     FAlwaysShowCaret: Boolean;
     FBackgroundColor: TColor;
-    FBookmarkList: TBCEditorMarkList;
+    FBookmarkList: TBCEditorMarkList;  // NB_NOTE
     FBorderStyle: TBorderStyle;
     FCaret: TBCEditorCaret;
     FCaretOffset: TPoint;
@@ -86,7 +86,7 @@ type
     FLineNumbersCount: Integer;
     FLines: TBCEditorLines;
     FLinespacing: Integer;
-    FMarkList: TBCEditorMarkList;
+    FMarkList: TBCEditorMarkList;    // NB_NOTE
     FMatchingPair: TBCEditorMatchingPair;
     FMatchingPairMatchStack: array of TBCEditorMatchingPairTokenMatch;
     FMatchingPairOpenDuplicate, FMatchingPairCloseDuplicate: array of Integer;
@@ -4040,7 +4040,7 @@ begin
     LSpaceCount1 := 0;
     if LLength < LTextCaretPosition.Char - 1 then
     begin
-      if toTabsToSpaces in FTabs.Options then
+      if toTabsToSpaces in FTabs.Options then    // TTS 1 DoChar
         LSpaceBuffer := StringOfChar(BCEDITOR_SPACE_CHAR, LTextCaretPosition.Char - LLength - 1 - Ord(FTextEntryMode))
       else
       if AllWhiteUpToTextPosition(LTextCaretPosition, LLineText, LLength) then
@@ -4496,7 +4496,7 @@ var
   begin
     Result := '';
     if eoAutoIndent in FOptions then
-      if toTabsToSpaces in FTabs.Options then
+      if toTabsToSpaces in FTabs.Options then  // TTS 2 DoLineBreak
         Result := StringOfChar(BCEDITOR_SPACE_CHAR, ASpaceCount)
       else
       begin
@@ -4780,7 +4780,7 @@ begin
     if LTextCaretPosition.Char > LLength + 1 then
     begin
       LCharCount := LTextCaretPosition.Char - LLength - 1;
-      if toTabsToSpaces in FTabs.Options then
+      if toTabsToSpaces in FTabs.Options then       // TTS 3 DoInsertText
         LSpaces := StringOfChar(BCEDITOR_SPACE_CHAR, LCharCount)
       else
       begin
@@ -4879,7 +4879,7 @@ begin
   end;
 
   LTextCaretPosition := TextCaretPosition;
-  if toTabsToSpaces in FTabs.Options then
+  if toTabsToSpaces in FTabs.Options then  // TTS 4 DoShiftTabKey
     LTabWidth := FTabs.Width
   else
     LTabWidth := 1;
@@ -4892,7 +4892,7 @@ begin
   begin
     LOldSelectedText := Copy(FLines[LTextCaretPosition.Line], LNewX, LTabWidth);
 
-    if toTabsToSpaces in FTabs.Options then
+    if toTabsToSpaces in FTabs.Options then  // TTS 5 DoShiftTabKey
     begin
       if LOldSelectedText <> StringOfChar(BCEDITOR_SPACE_CHAR, FTabs.Width) then
         Exit;
@@ -5036,7 +5036,7 @@ begin
     if LLengthAfterLine > 1 then
       LTextCaretPosition.Char := Length(LTextLine) + 1;
 
-    if toTabsToSpaces in FTabs.Options then
+    if toTabsToSpaces in FTabs.Options then  // TTS 6 DoTabKey
     begin
       if toColumns in FTabs.Options then
         LTabText := StringOfChar(BCEDITOR_SPACE_CHAR, LCharCount - LDisplayCaretPosition.Column mod FTabs.Width)
@@ -8274,12 +8274,12 @@ begin
       end
       else
       begin
-        if toTabsToSpaces in FTabs.Options then
+        if toTabsToSpaces in FTabs.Options then  // TTS 7
           LCaretPositionX := LOldCaretPosition.Char + FTabs.Width
         else
           LCaretPositionX := LOldCaretPosition.Char + 1;
       end;
-      if toTabsToSpaces in FTabs.Options then
+      if toTabsToSpaces in FTabs.Options then    // TTS 8
         LSpaces := StringOfChar(BCEDITOR_SPACE_CHAR, FTabs.Width)
       else
         LSpaces := BCEDITOR_TAB_CHAR;
@@ -12738,7 +12738,7 @@ var
       if LTextCaretPosition.Char > LLength + 1 then
       begin
         LCharCount := LTextCaretPosition.Char - LLength - 1;
-        if toTabsToSpaces in FTabs.Options then
+        if toTabsToSpaces in FTabs.Options then      // TTS 9 DoSelectedText InsertNormal
           LSpaces := StringOfChar(BCEDITOR_SPACE_CHAR, LCharCount)
         else
         if AllWhiteUpToTextPosition(LTextCaretPosition, LLeftSide, LLength) then
@@ -12831,7 +12831,7 @@ var
             if LPText - LPStart > 0 then
             begin
               LLength := LInsertPosition - 1;
-              if toTabsToSpaces in FTabs.Options then
+              if toTabsToSpaces in FTabs.Options then  // TTS 10 DoSelectedText InsertColumn
                 LTempString := StringOfChar(BCEDITOR_SPACE_CHAR, LLength)
               else
                 LTempString := StringOfChar(BCEDITOR_TAB_CHAR, LLength div FTabs.Width) +

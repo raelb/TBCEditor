@@ -40,7 +40,6 @@ type
     property OwnsObjects;
   public
     constructor Create(AOwner: TCustomControl);
-
     function Extract(AItem: TBCEditorMark): TBCEditorMark;
     function Find(const AIndex: Integer): TBCEditorMark;
     function First: TBCEditorMark;
@@ -57,7 +56,7 @@ function CompareLines(Item1, Item2: Pointer): Integer;
 implementation
 
 uses
-  BCEditor.Editor.Base, System.Types;
+  BCEditor.Editor.Base, System.Types, Vcl.Dialogs;
 
 function CompareLines(Item1, Item2: Pointer): Integer;
 begin
